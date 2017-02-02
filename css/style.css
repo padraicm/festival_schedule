@@ -209,7 +209,7 @@ Main Components
         height: auto;
         max-width: none;
         margin-right: 0; }
-        .cd-schedule .events .single-event a {
+        .cd-schedule .events .single-event .event-clickable {
           padding: 1.2em; }
         .cd-schedule .events .single-event.half-left {
           width: calc(50% + 2px); }
