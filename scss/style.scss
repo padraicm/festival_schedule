@@ -203,11 +203,28 @@ Main Components
 			margin-right: 5%;
 		}
 		
-		a {
+		.event-clickable {
 			display: block;
+      cursor: pointer;
 			height: 100%;
 			padding: .8em;
 		}
+    
+    .event-ticket {
+    	display: block;
+    	color: white;
+      float:right;
+      width: 100px;
+      text-align: center;
+      padding: 8px 10px;
+      background: rgba(0, 0, 0, 0.1);
+      border: 1px solid white;
+      margin-right: 10px;
+      
+    	@include font-smoothing;
+      
+    }
+    
 	}
 
   @include MQ(S) {
@@ -357,7 +374,7 @@ Main Components
 //modal
 .event-info {
   font-size: 1.25em;
-  padding: 20px 55px;
+  padding: 20px 30px;
   word-break: break-word;
   
   p { 
@@ -406,7 +423,7 @@ Main Components
 }
 
 .cd-schedule .event-venue {
-  float: right;
+  margin-left: 10px;
 }
 
 .cd-schedule .single-event[data-event="event-1"],

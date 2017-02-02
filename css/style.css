@@ -139,10 +139,23 @@ Main Components
     transition: opacity .2s, background .2s; }
     .cd-schedule .events .single-event:last-of-type {
       margin-right: 5%; }
-    .cd-schedule .events .single-event a {
+    .cd-schedule .events .single-event .event-clickable {
       display: block;
+      cursor: pointer;
       height: 100%;
       padding: .8em; }
+    .cd-schedule .events .single-event .event-ticket {
+      display: block;
+      color: white;
+      float: right;
+      width: 100px;
+      text-align: center;
+      padding: 8px 10px;
+      background: rgba(0, 0, 0, 0.1);
+      border: 1px solid white;
+      margin-right: 10px;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale; }
   @media only screen and (min-width: 800px) {
     .cd-schedule .events {
       float: left;
@@ -245,7 +258,7 @@ Main Components
 
 .event-info {
   font-size: 1.25em;
-  padding: 20px 55px;
+  padding: 20px 30px;
   word-break: break-word; }
   .event-info p {
     margin-bottom: 20px; }
@@ -281,7 +294,7 @@ Main Components
   float: left; }
 
 .cd-schedule .event-venue {
-  float: right; }
+  margin-left: 10px; }
 
 .cd-schedule .single-event[data-event="event-1"],
 .cd-schedule [data-event="event-1"] .header-bg {
