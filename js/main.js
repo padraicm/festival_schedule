@@ -4,7 +4,128 @@ jQuery(document).ready(function($){
 	//if browser does not support transitions - use a different event to trigger them
 	if( !transitionsSupported ) transitionEnd = 'noTransition';
 	
-	//should add a loding while the events are organized 
+  initSchedule = function() {
+    
+    
+    start_time = '17:00'
+    end_time = '23:30'
+    
+    timeline_start = getScheduleTimestamp(start_time)
+    timeline_end = getScheduleTimestamp(end_time)
+    timeline_duration = timeline_end - timeline_start
+    
+    timeline_increment = 30
+    
+    time = timeline_start
+    $.each( window.events.groups, function(key, group) {
+    
+      schedule = '<div class="schedule">'
+        schedule += '<div class="timeline">'
+          schedule += '<ul>'
+            while( time < timeline_end) {
+              schedule += '<li><span>' + time +'</span></li>'
+              time += timeline_increment
+            }
+
+          schedule += '</ul>'
+        schedule += '</div>'
+      schedule += '<div class="events">'
+  
+    
+    
+      schedule += '<ul>'
+        schedule += '<li class="events-group">'
+        schedule += '<div class="top-info"><span>' + group.label + '</span></div>'
+        schedule += '<ul>'
+            
+        eventSlotHeight = 0
+        
+        $.each( group.events , function(key, event) {
+          top = eventSlotHeight * (event.start - timeline_start) / timeline_increment
+          
+          schedule += "<li class='single-event half-left' data-content='event-abs-circuit' data-event='event-1' data-top=" + top + ">"
+          schedule += "<span class='event-clickable'>"
+          schedule += "<a class='event-ticket' target='new_window' href='" + event.ticket.url + "'>" + event.ticket.price + " Tickets</a>"
+          schedule += "<span class='event-ticket-name'>" + event.ticket.name + "</span>"
+          schedule += "<span class='event-date'>" + event.time + "</span>"
+          schedule += "<span class='event-venue'>" + event.location + "</span>"
+          schedule += "</span>"
+        
+          $.each( event.films, function(key, film_title) {
+            film = self.films.films.find( function(film) { return film.title == film_title})
+            if(film === undefined) { console.log("Missing film for title " + film_title)}
+            schedule += "<div class='event'>"
+            schedule += '<a class="event-name" href="javascript:">'
+            schedule += film.title
+            schedule += "<span class='event-time'>" + film.details + '</span>'
+            schedule += "</a>"
+
+            schedule += "<div class='event-toggle'>"
+              schedule += "<div class='event-description'>"
+              schedule += film.description
+              schedule += "</div>"
+          
+              if(film.url ) {
+                schedule += "<div class='event-link'>"
+                schedule += '<a href="' + film.url + '">' + film.url + '</a>'
+                schedule += "</div>"
+              }
+            
+              if( film.video && film.video.includes('vimeo') ) {
+                id = film.video.match("vimeo.com\/(\\d*)")[1]
+                schedule += "<div class='event-video'>"
+                schedule += '<div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/' + id + '?title=0&byline=0&portrait=0" style="position:absolute;top:0;left:0;width:100%;height:100%;" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>'
+                schedule += "</div>"
+          
+              }
+              schedule += "</div>"
+            schedule += "</div>"
+          })
+          schedule += "</li>"
+        });
+        schedule += '</li>'
+        schedule += '</ul>'
+      schedule += '</ul>'
+      schedule += '</div>'
+    
+      $('.schedules').append(schedule)
+        
+      
+        
+    });
+  }
+  
+  // jQuery.ajax({
+  //   url: 'https://raw.githubusercontent.com/padraicm/festival_tickets/master/data/films.json',
+  //   success: function( data, status, xhr ) {
+  //     window.films = JSON.parse(data)
+  //
+  //     jQuery.ajax({
+  //       url: 'https://raw.githubusercontent.com/padraicm/festival_tickets/master/data/events.json',
+  //       success: function( data, status, xhr ) {
+  //         window.events = JSON.parse(data)
+  //         initSchedule()
+  //       }
+  //     });
+  //
+  //
+  //   }
+  // });
+  
+  
+  
+    //
+  // var schedules = $('.schedule');
+  // var objSchedulesPlan = [],
+  //   windowResize = false;
+  //
+  // if( schedules.length > 0 ) {
+  //   schedules.each(function(){
+  //     //create SchedulePlan objects
+  //     objSchedulesPlan.push(new SchedulePlan($(this)));
+  //   });
+  // }
+	
 
 	function SchedulePlan( element ) {
 		this.element = element;
@@ -37,8 +158,6 @@ jQuery(document).ready(function($){
 	SchedulePlan.prototype.initSchedule = function() {
 		this.scheduleReset();
 		this.initEvents();
-    if($.QueryString.tickets)
-      this.addTickets();
 	};
 
 	SchedulePlan.prototype.scheduleReset = function() {
@@ -124,16 +243,6 @@ jQuery(document).ready(function($){
 		this.element.removeClass('loading');
 	};
   
-	SchedulePlan.prototype.addTickets = function() {
-		var self = this;
-    this.singleEvents.each(function(index,event) {
-      ticket_url = $(event).data('ticket')
-      if(ticket_url)
-      {
-        $(event).find('.event-clickable').prepend($("<a class='event-ticket' target='new_window' href='" + ticket_url + "'>Tickets</a>"))
-      }
-    })
-  };
 
 	SchedulePlan.prototype.openModal = function(event) {
 		var self = this;
@@ -375,16 +484,7 @@ jQuery(document).ready(function($){
 		}
 	};
 
-	var schedules = $('.cd-schedule');
-	var objSchedulesPlan = [],
-		windowResize = false;
-	
-	if( schedules.length > 0 ) {
-		schedules.each(function(){
-			//create SchedulePlan objects
-			objSchedulesPlan.push(new SchedulePlan($(this)));
-		});
-	}
+
 
 	$(window).on('resize', function(){
 		if( !windowResize ) {

@@ -40,21 +40,55 @@ a {
   text-align: center;
   font-size: 1.2em;
   background: #00cbff;
-  margin-bottom: 20px;
+  margin-bottom: 0px;
   background: #07a566;
+  background: black;
   
-  a {
+  .toplinks a {
     color: #edfff0;
     display: inline-block;
     margin: 0px 10px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.33);
   }
   
-  .title {
+  a.title {
     color: #edfff0;
+    display: none;
     text-shadow: 2px 2px 0px #9a52fb;
     font-size: 1.5em;
     border-bottom: none;
+  }
+  
+  .logo {
+    max-width: 100%;
+    padding: 0 100px;
+  }
+}
+
+
+.navigation {
+  font-size: 1.3em;
+  text-transform: uppercase;
+  background: #4b2979;
+  text-align: center;
+  margin-bottom: 10px;
+  
+  li { 
+    display: inline-block;
+    padding: 10px;
+    a {
+      text-decoration: none;
+      color: #edfff0;
+    }
+  }
+}
+
+.image-schedule {
+  margin-top: 30px;
+  img { 
+    display: block;
+    margin: auto;
+    
   }
 }
 
@@ -63,7 +97,7 @@ a {
 Main Components 
 
 -------------------------------- */
-.cd-schedule {
+.schedule {
 	position: relative;
   
   float: left;
@@ -91,7 +125,7 @@ Main Components
 	}
 }
 
-.cd-schedule .timeline {
+.schedule .timeline {
 	display: none;
 
   @include MQ(M) {
@@ -148,7 +182,7 @@ Main Components
   }
 }
 
-.cd-schedule .events {
+.schedule .events {
 	position: relative;
 	z-index: 1;
 
@@ -347,27 +381,27 @@ Main Components
   }
 }
 
-.cd-schedule.loading .events .single-event {
-	/* the class .loading is added by default to the .cd-schedule element
+.schedule.loading .events .single-event {
+	/* the class .loading is added by default to the .schedule element
 	   it is removed as soon as the single events are placed in the schedule plan (using javascript) */
 	opacity: 0;
 }
 
-.cd-schedule .event-name,
-.cd-schedule .event-date,
-.cd-schedule .event-venue,
-.cd-schedule .event-subline {
+.schedule .event-name,
+.schedule .event-date,
+.schedule .event-venue,
+.schedule .event-subline {
 	display: block;
 	color: white;
 	@include font-smoothing;
 }
 
-.cd-schedule .event-subline {
+.schedule .event-subline {
   font-size: 0.8em;
   font-style: italic;
 }
 
-.cd-schedule .event-data {
+.schedule .event-data {
   display: none;
 }
 
@@ -395,14 +429,14 @@ Main Components
   
 }
 
-.cd-schedule .event-name .event-time {
+.schedule .event-name .event-time {
   font-size: 1.6rem;
   display: block;
   margin-bottom: 12px;
   opacity: 0.7;
 }
 
-.cd-schedule .event-name {
+.schedule .event-name {
 	font-size: 2.4rem;
   clear: both;
   margin-top: 1.25em;
@@ -412,8 +446,8 @@ Main Components
 	}
 }
 
-.cd-schedule .event-date,
-.cd-schedule .event-venue {
+.schedule .event-date,
+.schedule .event-venue {
 	/* they are not included in the the HTML but added using JavScript */
 	font-size: 1.7rem;
 //  opacity: .7;
@@ -422,62 +456,62 @@ Main Components
   float: left;
 }
 
-.cd-schedule .event-venue {
+.schedule .event-venue {
   margin-left: 10px;
 }
 
-.cd-schedule .single-event[data-event="event-1"],
-.cd-schedule [data-event="event-1"] .header-bg {
+.schedule .single-event[data-event="event-1"],
+.schedule [data-event="event-1"] .header-bg {
 	/* this is used to set a background color for the event and the modal window */
 	background: $event-color-1;
 }
 
-.cd-schedule .single-event[data-event="event-1"]:hover {
+.schedule .single-event[data-event="event-1"]:hover {
 	background: lighten($event-color-1, 5%);
 }
 
-.cd-schedule .single-event[data-event="event-2"],
-.cd-schedule [data-event="event-2"] .header-bg {
+.schedule .single-event[data-event="event-2"],
+.schedule [data-event="event-2"] .header-bg {
 	background: $event-color-2;
 }
 
-.cd-schedule .single-event[data-event="event-2"]:hover {
+.schedule .single-event[data-event="event-2"]:hover {
 	background: lighten($event-color-2, 5%);
 }
 
-.cd-schedule .single-event[data-event="event-3"],
-.cd-schedule [data-event="event-3"] .header-bg {
+.schedule .single-event[data-event="event-3"],
+.schedule [data-event="event-3"] .header-bg {
 	background: $event-color-3;
 }
 
-.cd-schedule .single-event[data-event="event-3"]:hover {
+.schedule .single-event[data-event="event-3"]:hover {
 	background: lighten($event-color-3, 5%);
 }
 
-.cd-schedule .single-event[data-event="event-4"],
-.cd-schedule [data-event="event-4"] .header-bg {
+.schedule .single-event[data-event="event-4"],
+.schedule [data-event="event-4"] .header-bg {
 	background: $event-color-4;
 }
 
-.cd-schedule .single-event[data-event="event-4"]:hover {
+.schedule .single-event[data-event="event-4"]:hover {
 	background: lighten($event-color-4, 5%);
 }
 
-.cd-schedule .single-event[data-event="event-party"],
-.cd-schedule [data-event="event-party"] .header-bg {
+.schedule .single-event[data-event="event-party"],
+.schedule [data-event="event-party"] .header-bg {
 	background: $event-color-party;
 }
 
-.cd-schedule .single-event[data-event="event-party"]:hover {
+.schedule .single-event[data-event="event-party"]:hover {
 	background: lighten($event-color-party, 5%);
 }
 
-.cd-schedule .single-event[data-event="event-fair"],
-.cd-schedule [data-event="event-fair"] .header-bg {
+.schedule .single-event[data-event="event-fair"],
+.schedule [data-event="event-fair"] .header-bg {
 	background: $event-color-fair;
 }
 
-.cd-schedule .single-event[data-event="event-fair"]:hover {
+.schedule .single-event[data-event="event-fair"]:hover {
 	background: lighten($event-color-fair, 5%);
 }
 
@@ -736,22 +770,22 @@ body.modal-is-open {
 
 
 @include MQ(M) {
-	.cd-schedule.animation-completed  .event-modal .close,
-	.cd-schedule.content-loaded.animation-completed  .event-modal .event-info {
+	.schedule.animation-completed  .event-modal .close,
+	.schedule.content-loaded.animation-completed  .event-modal .event-info {
 		/* 	the .animation-completed class is added when the modal animation is completed
 			the .content-loaded class is added when the modal content has been loaded (using ajax) */
 		opacity: 1;
 		transition: opacity .2s;
 	}
 
-	.cd-schedule.modal-is-open .body-bg {
+	.schedule.modal-is-open .body-bg {
 		opacity: 1;
 		transition: transform .4s;
 		transition-timing-function: cubic-bezier(.5,0,.1,1);
 	}
 }
 
-.cd-schedule .cover-layer {
+.schedule .cover-layer {
 	/* layer between the content and the modal window */
 	position: fixed;
 	z-index: 2;
@@ -765,7 +799,7 @@ body.modal-is-open {
 	transition: opacity .4s, visibility .4s;
 }
 
-.cd-schedule.modal-is-open .cover-layer {
+.schedule.modal-is-open .cover-layer {
 	opacity: 1;
 	visibility: visible;
 }
