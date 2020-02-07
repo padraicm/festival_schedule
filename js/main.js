@@ -486,12 +486,12 @@ jQuery(document).ready(function($){
 
 
 
-	$(window).on('resize', function(){
-		if( !windowResize ) {
-			windowResize = true;
-			(!window.requestAnimationFrame) ? setTimeout(checkResize) : window.requestAnimationFrame(checkResize);
-		}
-	});
+  // $(window).on('resize', function(){
+  //   if( !windowResize ) {
+  //     windowResize = true;
+  //     (!window.requestAnimationFrame) ? setTimeout(checkResize) : window.requestAnimationFrame(checkResize);
+  //   }
+  // });
 
 	$(window).keyup(function(event) {
 		if (event.keyCode == 27) {
